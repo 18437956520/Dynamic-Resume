@@ -1,15 +1,19 @@
 var result = `
-面试官您好，我是xx
-下面我将用动画的形式来介绍自己
+/*
+ * 面试官您好，我是xx
+ * 下面我将用动画的形式来介绍自己
+ * 只用文字介绍太单调了
+ * 那就用代码来显示吧
+ * 首先准备一些样式
+ */
 
-只用文字介绍太单调了
-那就用代码来显示吧
-
-首先准备一些样式
+*{
+    transition: all 0.5s;
+}
 
 html{
     background: #ddd;
-    font-size: 20px;
+    font-size: 16px;
 }
 `
 
@@ -21,4 +25,4 @@ var id = setInterval(()=>{
     if(n >= result.length){
         window.clearInterval(id)
     }
-},10)
+},10)       
