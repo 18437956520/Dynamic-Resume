@@ -15,6 +15,11 @@ html{
     background: #ddd;
     font-size: 16px;
 }
+
+#code{
+    border: 1px solid red;
+    padding: 10px;
+}
 `
 
 var n = 0
