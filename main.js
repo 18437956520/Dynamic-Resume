@@ -20,6 +20,19 @@ html{
     border: 1px solid red;
     padding: 10px;
 }
+
+/* 我现在需要一点代码高亮 */
+
+.token.selector{
+    color: #690;
+}
+.token.punctuation{
+    color: #999;
+}
+.token.property{
+    color: #905;
+}
+
 `
 
 var n = 0
