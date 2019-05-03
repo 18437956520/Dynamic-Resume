@@ -22,7 +22,6 @@ html{
 }
 
 /* 我现在需要一点代码高亮 */
-
 .token.selector{
     color: #690;
 }
@@ -37,6 +36,10 @@ html{
 #code{
     transform: rotate(360deg);
 }
+
+/* 好了好了，我来介绍一下自己吧 */
+/* 我需要一张白纸 */
+
 `
 
 var n = 0
@@ -48,5 +51,35 @@ var id = setInterval(()=>{
     styleTag.innerHTML = result.substring(0,n)
     if(n >= result.length){
         window.clearInterval(id)
+        fn2()
+        fn3(result)
     }
 },10)       
+
+function fn2(){
+    var paper = document.createElement('div')
+    paper.id = 'paper'
+    document.body.appendChild(paper)
+}
+
+function fn3(preResult){
+    var result = `
+        #paper{
+            width: 200px; 
+            height: 100px;
+            background: red;
+        }
+    `
+
+    var n = 0
+    var id = setInterval(()=>{
+        n += 1
+        code.innerHTML = preResult + result.substring(0,n)
+        code.innerHTML = 
+            Prism.highlight(code.innerHTML, Prism.languages.css)
+        styleTag.innerHTML = preResult + result.substring(0,n)
+        if(n >= result.length){
+            window.clearInterval(id)
+        }
+    },10)
+}
