@@ -25,9 +25,11 @@ html{
 .token.selector{
     color: #690;
 }
+
 .token.punctuation{
     color: #999;
 }
+
 .token.property{
     color: #905;
 }
