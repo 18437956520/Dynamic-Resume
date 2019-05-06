@@ -14,6 +14,19 @@ function writeCode(prefix,code,fn) {
     }, 10)
 }
 
+function writeMarkdown(markdown,fn){
+    let domPaper = document.querySelector('#paper>.content')
+    let n = 0
+    let id = setInterval(() => {
+        n += 1
+        domPaper.innerHTML = markdown.substring(0, n)
+        domPaper.scrollTop = 10000
+        if (n >= markdown.length) {
+            window.clearInterval(id)
+        }
+    }, 10)
+}
+
 var result = `
 /*
  * 面试官您好，我是xx
@@ -57,23 +70,54 @@ html{
 
 /* 好了好了，我来介绍一下自己吧 */
 /* 我需要一张白纸 */
+#code{
+    position: fixed;
+    left: 0;
+    width: 50%;
+    height: 100%;
+}
+#paper{
+    position: fixed;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+#paper > .content{
+    background: white;
+    width: 100%;
+    height: 100%;
+}
 `
 var result2 = `
-#paper{
-    width: 200px; 
-    height: 100px;
-    background: red;
-}
+#paper{ }
+`
+var md = `
+# 自我介绍
+我叫xxx
+ajslksj
+asjljsa
+salksjlabca
+sajldjklas
 `
 writeCode('',result,()=>{
     createPaper(()=>{
-        writeCode(result,result2)
+        writeCode(result,result2,()=>{
+            writeMarkdown(md)
+        })
     })
 })
 
 function createPaper(fn) {
     var paper = document.createElement('div')
     paper.id = 'paper'
+    var content = document.createElement('pre')
+    content.className = 'content'
+    paper.appendChild(content)
     document.body.appendChild(paper)
     fn()
 }
