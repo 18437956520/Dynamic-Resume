@@ -1,3 +1,17 @@
+/* 把code写到#code和style标签中 */
+function writeCode(code) {
+    let domCode = document.querySelector('#code')
+    let n = 0
+    let id = setInterval(() => {
+        n += 1
+        domCode.innerHTML = Prism.highlight(code.substring(0, n), Prism.languages.css)
+        styleTag.innerHTML = code.substring(0, n)
+        if (n >= result.length) {
+            window.clearInterval(id)
+        }
+    }, 10)
+}
+
 var result = `
 /*
  * 面试官您好，我是xx
@@ -36,35 +50,22 @@ html{
 
 /* 加点3D效果 */
 #code{
-    transform: rotate(360deg);
+    transform: rotateY(360deg);
 }
 
 /* 好了好了，我来介绍一下自己吧 */
 /* 我需要一张白纸 */
 
 `
+writeCode(result)
 
-var n = 0
-var id = setInterval(()=>{
-    n += 1
-    code.innerHTML = result.substring(0,n)
-    code.innerHTML = 
-        Prism.highlight(code.innerHTML, Prism.languages.css)
-    styleTag.innerHTML = result.substring(0,n)
-    if(n >= result.length){
-        window.clearInterval(id)
-        fn2()
-        fn3(result)
-    }
-},10)       
-
-function fn2(){
+function fn2() {
     var paper = document.createElement('div')
     paper.id = 'paper'
     document.body.appendChild(paper)
 }
 
-function fn3(preResult){
+function fn3(preResult) {
     var result = `
         #paper{
             width: 200px; 
@@ -74,14 +75,14 @@ function fn3(preResult){
     `
 
     var n = 0
-    var id = setInterval(()=>{
+    var id = setInterval(() => {
         n += 1
-        code.innerHTML = preResult + result.substring(0,n)
-        code.innerHTML = 
+        code.innerHTML = preResult + result.substring(0, n)
+        code.innerHTML =
             Prism.highlight(code.innerHTML, Prism.languages.css)
-        styleTag.innerHTML = preResult + result.substring(0,n)
-        if(n >= result.length){
+        styleTag.innerHTML = preResult + result.substring(0, n)
+        if (n >= result.length) {
             window.clearInterval(id)
         }
-    },10)
+    }, 10)
 }
