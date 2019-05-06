@@ -1,13 +1,15 @@
 /* 把code写到#code和style标签中 */
-function writeCode(code) {
+function writeCode(prefix,code,fn) {
     let domCode = document.querySelector('#code')
     let n = 0
     let id = setInterval(() => {
         n += 1
-        domCode.innerHTML = Prism.highlight(code.substring(0, n), Prism.languages.css)
-        styleTag.innerHTML = code.substring(0, n)
-        if (n >= result.length) {
+        domCode.innerHTML = Prism.highlight(prefix + code.substring(0, n), Prism.languages.css)
+        styleTag.innerHTML = prefix + code.substring(0, n)
+        domCode.scrollTop = 10000
+        if (n >= code.length) {
             window.clearInterval(id)
+            fn()
         }
     }, 10)
 }
@@ -55,34 +57,24 @@ html{
 
 /* 好了好了，我来介绍一下自己吧 */
 /* 我需要一张白纸 */
-
 `
-writeCode(result)
+var result2 = `
+#paper{
+    width: 200px; 
+    height: 100px;
+    background: red;
+}
+`
+writeCode('',result,()=>{
+    createPaper(()=>{
+        writeCode(result,result2)
+    })
+})
 
-function fn2() {
+function createPaper(fn) {
     var paper = document.createElement('div')
     paper.id = 'paper'
     document.body.appendChild(paper)
+    fn()
 }
 
-function fn3(preResult) {
-    var result = `
-        #paper{
-            width: 200px; 
-            height: 100px;
-            background: red;
-        }
-    `
-
-    var n = 0
-    var id = setInterval(() => {
-        n += 1
-        code.innerHTML = preResult + result.substring(0, n)
-        code.innerHTML =
-            Prism.highlight(code.innerHTML, Prism.languages.css)
-        styleTag.innerHTML = preResult + result.substring(0, n)
-        if (n >= result.length) {
-            window.clearInterval(id)
-        }
-    }, 10)
-}
